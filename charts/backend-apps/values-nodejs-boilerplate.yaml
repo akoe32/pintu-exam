@@ -42,7 +42,7 @@ securityContext: {}
 configmapAnnotations: []
 configuration:
   PORT: "5000"
-  MONGO_URL: "mongodb://root:jG0EU4uoSf@mongodb.mongodb.svc.cluster.local:27017"
+  MONGO_URL: "mongodb://root:rAZMJ0KHLA@mongodb.mongodb.svc.cluster.local:27017"
 
 envFrom:
   - configMapRef:
