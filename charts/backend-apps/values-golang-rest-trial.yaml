@@ -60,11 +60,11 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: golang-rest-trial.local
+    - host: go-rest-103-226-138-127.nip.io
       paths:
         - path: /
           pathType: ImplementationSpecific
-    - host: golang-rest-trial.local
+    - host: go-rest-103-226-138-127.nip.io
       paths:
         - path: /ping
           pathType: ImplementationSpecific
