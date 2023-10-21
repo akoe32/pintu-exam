@@ -76,7 +76,7 @@ jobs:
           git config --global user.name "akoe32"
           git clone https://$BOT_ACCOUNT:$BOT_PASS@github.com/akoe32/pintu-exam.git
           cd pintu-exam/charts/backend-apps
-          yq -i ".image.tag = \"TAGS\"" values-nodejs-boilerplate.yaml
+          yq -i ".image.tag = \"$TAGS\"" values-nodejs-boilerplate.yaml
           helm upgrade --install nodejs-boilerplate -f values-nodejs-boilerplate.yaml . -n golang
           git add .
           git commit -m "Bypass approval, bump up docker image nodejs-boilerplate using image tag $TAGS" || true
