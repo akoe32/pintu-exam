@@ -9,7 +9,7 @@ Repo for Pintu SRE exam
 
 ### Flow Diagram
 
-a![flow-k8s](https://github.com/akoe32/pintu-exam/assets/19146909/b5c63401-704d-4291-a72d-56985f017635)
+![flow-k8s](https://github.com/akoe32/pintu-exam/assets/19146909/b5c63401-704d-4291-a72d-56985f017635)
 
 ### What's inside this repo?
 
@@ -66,7 +66,7 @@ helm install [RELEASE_NAME] -f charts/backend-apps/values-nodejs-boilerplate.yam
 | endpoint     | url                                         | method     |
 | :---:        | :---:                                       | :---:      |
 | /            | nodejs-boilerplate-103-226-138-127.nip.io   | GET        |
-| /ping        | nodejs-boilerplate-103-226-138-127.nip.io   | GET        |
+| /ping        | nodejs-boilerplate-103-226-138-127.nip.io   | POST        |
 
 ### Test Endpoint 
 
