@@ -60,10 +60,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Deploy Go apps to k8s
         run: |
+          export BOT_ACCOUNT=${{ secrets.BOT_ACCOUNT }}
+          export BOT_PASS=${{ secrets.BOT_PASS }}
           export TAGS=$(git rev-parse --short "$GITHUB_SHA")
-          cd charts/backend-apps
+          git clone https://$BOT_ACCOUNT:$BOT_PASS@https://github.com/akoe32/pintu-exam.git
+          cd pintu-exam/charts/backend-apps
           yq -i ".image.tag = \"TAGS\"" values-golang-rest-trial.yaml
-          helm upgrade --instal golang-rest-trial -f values-golang-rest-trial.yaml . -n golang
+          helm upgrade --install golang-rest-trial -f values-golang-rest-trial.yaml . -n golang
           git add .
           git commit -m "Bypass approval, bump up docker image golang-rest-trial using image tag $TAGS" || true
           git push -u origin main
