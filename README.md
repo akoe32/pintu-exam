@@ -26,6 +26,9 @@ Repo for Pintu SRE exam
   - 40gb Disk
 - Kubernetes Cluster with Microk8s 
 - Helm as kubernetes manifest
+- CI/CD using Github Actions
+- Github action runner self hosted
+- Docker container image using docker hub
 
 ## Getting Started
 
