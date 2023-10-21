@@ -1,0 +1,80 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: nodejs backend CD
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - backend-apps/nodejs-boilerplate/*
+
+jobs:
+  build-image:
+    name: Build docker image
+    runs-on: self-hosted
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build Docker Image
+        run: |
+          export TAGS=$(git rev-parse --short "$GITHUB_SHA")
+          docker build -t akooe32/nodejs-boilerplate:$TAGS ./backend-apps/golang-rest-trial
+  push-image:  
+     name: Push docker image
+     runs-on: self-hosted
+     permissions:
+      packages: write
+      contents: read
+     steps:
+       - name: Check out the repo
+         uses: actions/checkout@v4
+      
+       - name: Log in to Docker Hub
+         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+         with:
+           username: ${{ secrets.DOCKER_USERNAME }}
+           password: ${{ secrets.DOCKER_PASSWORD }}
+       - name: Build Docker Image
+         run: |
+           export TAGS=$(git rev-parse --short "$GITHUB_SHA")
+           docker push akooe32/nodejs-boilerplate:$TAGS
+
+  deploy-to-kubernetes:
+     name: Deploy service to k8s
+     runs-on: self-hosted
+     permissions:
+      packages: write
+      contents: read
+     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Deploy Go apps to k8s
+        run: |
+          export TAGS=$(git rev-parse --short "$GITHUB_SHA")
+          cd charts/backend-apps
+          yq -i ".image.tag = \"TAGS\"" values-golang-rest-trial.yaml
+          helm upgrade --instal golang-rest-trial -f values-golang-rest-trial.yaml . -n golang
+          git add .
+          git commit -m "Bypass approval, bump up docker image golang-rest-trial using image tag $TAGS" || true
+          git push -u origin main
+
+          
+        
+
