@@ -77,7 +77,7 @@ jobs:
           git clone https://$BOT_ACCOUNT:$BOT_PASS@github.com/akoe32/pintu-exam.git
           cd pintu-exam/charts/backend-apps
           yq -i ".image.tag = \"$TAGS\"" values-nodejs-boilerplate.yaml
-          helm upgrade --install nodejs-boilerplate -f values-nodejs-boilerplate.yaml . -n node
+          helm upgrade --install nodejs-boilerplate -f values-nodejs-boilerplate.yaml . -n nodejs
           git add .
           git commit -m "Bypass approval, bump up docker image nodejs-boilerplate using image tag $TAGS" || true
           git push -u origin main
