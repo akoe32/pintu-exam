@@ -63,7 +63,7 @@ jobs:
           export BOT_ACCOUNT=${{ secrets.BOT_ACCOUNT }}
           export BOT_PASS=${{ secrets.BOT_PASS }}
           export TAGS=$(git rev-parse --short "$GITHUB_SHA")
-          git clone https://$BOT_ACCOUNT:$BOT_PASS@https://github.com/akoe32/pintu-exam.git
+          git clone https://$BOT_ACCOUNT:$BOT_PASS@github.com/akoe32/pintu-exam.git
           cd pintu-exam/charts/backend-apps
           yq -i ".image.tag = \"TAGS\"" values-golang-rest-trial.yaml
           helm upgrade --install golang-rest-trial -f values-golang-rest-trial.yaml . -n golang
