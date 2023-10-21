@@ -62,6 +62,8 @@ jobs:
         run: |
           export BOT_ACCOUNT=${{ secrets.BOT_ACCOUNT }}
           export BOT_PASS=${{ secrets.BOT_PASS }}
+          git config --global user.email "ryantasat32@gmail.com"
+          git config --global user.name "akoe32"
           export TAGS=$(git rev-parse --short "$GITHUB_SHA")
           git clone https://$BOT_ACCOUNT:$BOT_PASS@github.com/akoe32/pintu-exam.git
           cd pintu-exam/charts/backend-apps
