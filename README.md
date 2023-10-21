@@ -40,16 +40,46 @@ To run this project, you'll need to have the following installed:
 
 ### Run With Helm
 
-## Golang Backend
+**Golang Backend**
 
 ```sh
 helm install [RELEASE_NAME] -f charts/backend-apps/values-golang-rest-trial.yaml
 ```
 
-## Nodejs Backend
+**Nodejs Backend**
 
 ```sh
 helm install [RELEASE_NAME] -f charts/backend-apps/values-nodejs-boilerplate.yaml
 ```
 
+### Endpoint List
 
+**Golang**
+
+| endpoint     | url                              | method     |
+| :---:        | :---:                            | :---:      |
+| /            | go-rest-103-226-138-127.nip.io   | GET        |
+| /ping        | go-rest-103-226-138-127.nip.io   | GET        |
+
+**Nodejs**
+
+| endpoint     | url                                         | method     |
+| :---:        | :---:                                       | :---:      |
+| /            | nodejs-boilerplate-103-226-138-127.nip.io   | GET        |
+| /ping        | nodejs-boilerplate-103-226-138-127.nip.io   | GET        |
+
+### Test Endpoint 
+
+To test the endpoint we can use **postman** or traditionally with **curl**
+
+**Example**
+
+**Nodejs**
+```sh
+curl http://nodejs-boilerplate-103-226-138-127.nip.io/
+```
+
+**Golang**
+```sh
+curl http://go-rest-103-226-138-127.nip.io/
+```
