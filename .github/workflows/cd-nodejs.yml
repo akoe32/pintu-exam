@@ -39,6 +39,7 @@ jobs:
   push-image:  
      name: Push docker image
      runs-on: self-hosted
+     needs: build-image
      permissions:
       packages: write
       contents: read
@@ -59,6 +60,7 @@ jobs:
   deploy-to-kubernetes:
      name: Deploy service to k8s
      runs-on: self-hosted
+     needs: push-image
      permissions:
       packages: write
       contents: read
